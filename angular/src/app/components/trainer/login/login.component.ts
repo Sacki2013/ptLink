@@ -40,8 +40,7 @@ export class TrainerLoginComponent implements OnInit {
       if(data.success){
         this.authService.storeTrainerData(data.token, data.trainer);
         this.flashMessage.show('Hi, ' + data.trainer.fullName, { cssClass: 'alert-success', timeout: 3000 });
-        this.router.navigate(['/']);
-        // TODO: Should really like to a dashboard of client overview etc.
+        this.router.navigate(['/trainer/dashboard']);
       } else {
         this.flashMessage.show(data.message, { cssClass: 'alert-danger', timeout: 5000 });
         this.router.navigate(['/trainer/login']);

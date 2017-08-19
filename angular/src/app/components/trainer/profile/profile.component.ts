@@ -26,5 +26,6 @@ export class TrainerProfileComponent implements OnInit {
     }
   );
   }
-
 }
+
+// TODO: This component will be for edit profile, so use this to populate form. Dashboard will take this data.
