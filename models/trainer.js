@@ -38,3 +38,10 @@ module.exports.addTrainer = function(newTrainer, callback) {
     });
   });
 }
+
+module.exports.comparePassword = function(loginPassword, hash, callback) {
+  bcrypt.compare(loginPassword, hash, (err, isMatch) => {
+    if (err) throw err;
+    callback(null, isMatch);
+  });
+}

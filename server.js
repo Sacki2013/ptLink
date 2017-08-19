@@ -31,6 +31,9 @@ server.use(cors());
 server.use(bodyParser.json());
 server.use('/trainers', trainers);
 server.use(express.static(path.join(__dirname, 'client')));
+server.use(passport.initialize());
+server.use(passport.session());
+require('./config/passport')(passport);
 
 // Test Route
 server.get('/', (req, res) => {
