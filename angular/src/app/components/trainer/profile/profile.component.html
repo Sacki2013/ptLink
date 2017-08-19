@@ -1,3 +1,23 @@
-<p>
-  profile works!
-</p>
+<div *ngIf="trainer">
+  <h2>{{ trainer.firstName }} {{ trainer.lastName }}</h2>
+  <ul class="list-group">
+    <li class="list-group-item">
+      Username: {{ trainer.userName }}
+    </li>
+    <li class="list-group-item">
+      Email: {{ trainer.email }}
+    </li>
+    <li class="list-group-item">
+      Sex: {{ trainer.sex }}
+    </li>
+    <li class="list-group-item">
+      Age: {{ trainer.age }}
+    </li>
+    <li class="list-group-item">
+      REPs Number: {{ trainer.repsRef }}
+    </li>
+    <li class="list-group-item">
+      Clients: {{ trainer.clients.length }}
+    </li>
+  </ul>
+</div>

@@ -36,8 +36,8 @@ server.use(passport.session());
 require('./config/passport')(passport);
 
 // Test Route
-server.get('/', (req, res) => {
-  res.send('Angular Coming Soon');
+server.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/index.html'));
 });
 
 // Start Server

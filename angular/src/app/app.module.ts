@@ -13,25 +13,30 @@ import { HomeComponent } from './components/home/home.component';
 import { TrainerLoginComponent } from './components/trainer/login/login.component';
 import { TrainerRegisterComponent } from './components/trainer/register/register.component';
 import { TrainerProfileComponent } from './components/trainer/profile/profile.component';
+import { TrainerDashboardComponent } from './components/trainer/dashboard/dashboard.component';
 
 // Services
 import { TrainerAuthService } from './services/trainerAuth.service';
+import { TrainerAuthGuard } from './guards/trainerAuth.guard';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'trainer/register', component: TrainerRegisterComponent },
   { path: 'trainer/login', component: TrainerLoginComponent },
-  { path: 'trainer/profile', component: TrainerProfileComponent }
+  { path: 'trainer/profile', component: TrainerProfileComponent, canActivate:[TrainerAuthGuard] },
+  { path: 'trainer/dashboard', component: TrainerDashboardComponent, canActivate:[TrainerAuthGuard]  }
+  
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,    
     NavigationComponent,
     TrainerLoginComponent,
     TrainerRegisterComponent,
     TrainerProfileComponent,
-    HomeComponent
+    TrainerDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,8 @@ const appRoutes: Routes = [
     FlashMessagesModule
   ],
   providers: [
-    TrainerAuthService
+    TrainerAuthService,
+    TrainerAuthGuard
   ],
   bootstrap: [AppComponent]
 })
