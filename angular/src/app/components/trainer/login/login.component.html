@@ -1,3 +1,29 @@
-<p>
-  login works!
-</p>
+<form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit(loginForm.value)">
+  <h1>Login</h1>
+
+  <!-- Username -->
+  <div class="form-group">
+    <label class="form-control-label">Username</label>
+    <input type="text" class="form-control" [ngClass]="{'invalid': loginForm.controls['userName'].invalid && loginForm.controls['userName'].touched, 'valid': loginForm.controls['userName'].valid }" formControlName="userName" placeholder="Username...">
+    <div *ngIf="loginForm.controls['userName'].invalid &&loginForm.controls['userName'].touched">
+      <small class="form-text text-muted" *ngIf="loginForm.controls['userName'].errors.required && loginForm.controls['userName'].touched">
+        Username is required
+      </small>
+    </div>
+  </div>
+  <!-- ./form-group -->
+
+  <!-- Password -->
+  <div class="form-group">
+    <label class="form-control-label">Password</label>
+    <input type="password" class="form-control" [ngClass]="{'invalid': loginForm.controls['password'].invalid && loginForm.controls['password'].touched, 'valid': loginForm.controls['password'].valid }" formControlName="password" placeholder="Secure Password...">
+    <div *ngIf="loginForm.controls['password'].invalid &&loginForm.controls['password'].touched">
+      <small class="form-text text-muted" *ngIf="loginForm.controls['password'].errors.required && loginForm.controls['password'].touched">
+        Password is required
+      </small>
+    </div>
+  </div>
+  <!-- ./form-group -->
+
+  <button type="submit" class="btn btn-lg btn-primary" [disabled]="!loginForm.valid">Login</button>
+</form>

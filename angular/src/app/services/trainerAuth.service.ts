@@ -16,4 +16,23 @@ export class TrainerAuthService {
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:2204/trainer/register', trainer, { headers: headers }).map(res => res.json());
   }
+
+  authenticateTrainer(trainer){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:2204/trainer/authenticate', trainer, { headers: headers }).map(res => res.json());
+  }
+
+  storeTrainerData(token, trainer){
+    localStorage.setItem('id_token', token);
+    localStorage.setItem('trainer', JSON.stringify(trainer));
+    this.authToken = token;
+    this.trainer = trainer;
+  }
+
+  logout(){
+    this.authToken = null;
+    this.trainer = null;
+    localStorage.clear();
+  }
 }
