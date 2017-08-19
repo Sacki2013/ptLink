@@ -29,7 +29,7 @@ const port = process.env.PORT || 2204;
 server.use(logger('dev'));
 server.use(cors());
 server.use(bodyParser.json());
-server.use('/trainers', trainers);
+server.use('/trainer', trainers);
 server.use(express.static(path.join(__dirname, 'client')));
 server.use(passport.initialize());
 server.use(passport.session());

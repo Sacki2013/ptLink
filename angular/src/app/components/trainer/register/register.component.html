@@ -1,3 +1,142 @@
-<p>
-  register works!
-</p>
+<div class="row">
+  <form class="col-8" [formGroup]="registrationForm" (ngSubmit)="onRegisterSubmit(registrationForm.value)">
+    <h1>Register</h1>
+
+    <!-- First Name -->
+    <div class="form-group">
+      <label class="form-control-label">First Name</label>
+      <input type="text" class="form-control" [ngClass]="{'invalid': registrationForm.controls['firstName'].invalid && registrationForm.controls['firstName'].touched, 'valid': registrationForm.controls['firstName'].valid }" formControlName="firstName" placeholder="First Name...">
+      <div *ngIf="registrationForm.controls['firstName'].invalid &&registrationForm.controls['firstName'].touched">
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['firstName'].errors.required && registrationForm.controls['firstName'].touched">
+          First Name is required
+        </small>
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['firstName'].errors.minlength && registrationForm.controls['firstName'].touched">
+          Minimum length for First Name is 2 characters
+        </small>
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['firstName'].errors.maxlength && registrationForm.controls['firstName'].touched">
+          Maximum length for First Name is 15 characters
+        </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- Last Name -->
+    <div class="form-group">
+      <label class="form-control-label">Last Name</label>
+      <input type="text" class="form-control" [ngClass]="{'invalid': registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched, 'valid': registrationForm.controls['lastName'].valid }" formControlName="lastName" placeholder="Last Name...">
+      <div *ngIf="registrationForm.controls['lastName'].invalid &&registrationForm.controls['lastName'].touched">
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['lastName'].errors.required && registrationForm.controls['lastName'].touched">
+          Last Name is required
+        </small>
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['lastName'].errors.minlength && registrationForm.controls['lastName'].touched">
+          Minimum length for Last Name is 3 characters
+        </small>
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['lastName'].errors.maxlength && registrationForm.controls['lastName'].touched">
+          Maximum length for Last Name is 15 characters
+        </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- Username -->
+    <div class="form-group">
+      <label class="form-control-label">Username</label>
+      <input type="text" class="form-control" [ngClass]="{'invalid': registrationForm.controls['userName'].invalid && registrationForm.controls['userName'].touched, 'valid': registrationForm.controls['userName'].valid }" formControlName="userName" placeholder="Username...">
+      <div *ngIf="registrationForm.controls['userName'].invalid &&registrationForm.controls['userName'].touched">
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['userName'].errors.required && registrationForm.controls['userName'].touched">
+          Username is required
+        </small>
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['userName'].errors.minlength && registrationForm.controls['userName'].touched">
+          Minimum length for Username is 5 characters
+        </small>
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['userName'].errors.maxlength && registrationForm.controls['userName'].touched">
+          Maximum length for Username is 12 characters
+        </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- Email -->
+    <div class="form-group">
+      <label class="form-control-label">Email</label>
+      <input type="text" class="form-control" [ngClass]="{'invalid': registrationForm.controls['email'].invalid && registrationForm.controls['email'].touched, 'valid': registrationForm.controls['email'].valid }" formControlName="email" placeholder="Email...">
+      <div *ngIf="registrationForm.controls['email'].invalid &&registrationForm.controls['email'].touched">
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['email'].errors.required && registrationForm.controls['email'].touched">
+            Email is required
+          </small>
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['email'].errors.pattern && registrationForm.controls['email'].touched">
+            A valid email address is required
+          </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- Age -->
+    <div class="form-group">
+      <label class="form-control-label">Age</label>
+      <input type="number" class="form-control" [ngClass]="{'invalid': registrationForm.controls['age'].invalid && registrationForm.controls['age'].touched, 'valid': registrationForm.controls['age'].valid }" formControlName="age">
+      <div *ngIf="registrationForm.controls['age'].invalid &&registrationForm.controls['age'].touched">
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['age'].errors.required && registrationForm.controls['age'].touched">
+          Age is required
+        </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- Sex -->
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+            <input class="form-check-input" type="radio" formControlName="sex" id="inlineRadio1" value="male"> Male
+          </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+            <input class="form-check-input" type="radio" formControlName="sex" id="inlineRadio2" value="female"> Female
+          </label>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- REPS Ref -->
+    <div class="form-group">
+      <label class="form-control-label" data-toggle="tooltip" data-placement="top" title="Register of Exercise Professionals">REPs Number <i class="fa fa-question-circle"></i></label>
+      <!-- TODO: Add link in tooltip to REPS -->
+      <input type="text" class="form-control" [ngClass]="{'invalid': registrationForm.controls['repsRef'].invalid && registrationForm.controls['repsRef'].touched, 'valid': registrationForm.controls['repsRef'].valid }" formControlName="repsRef" placeholder="REPS Number...">
+      <div *ngIf="registrationForm.controls['repsRef'].invalid &&registrationForm.controls['repsRef'].touched">
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['repsRef'].errors.required && registrationForm.controls['repsRef'].touched">
+            REPS number is required
+          </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- Password -->
+    <div class="form-group">
+      <label class="form-control-label">Password</label>
+      <input type="password" class="form-control" [ngClass]="{'invalid': registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched, 'valid': registrationForm.controls['password'].valid }" formControlName="password" placeholder="Secure Password...">
+      <div *ngIf="registrationForm.controls['password'].invalid &&registrationForm.controls['password'].touched">
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['password'].errors.required && registrationForm.controls['password'].touched">
+            Password is required
+          </small>
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['password'].errors.minlength && registrationForm.controls['password'].touched">
+            Minimum length for password is 12 characters
+          </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+    <!-- TODO: Add confirm password  -->
+
+
+    <button type="submit" class="btn btn-lg btn-primary" [disabled]="!registrationForm.valid">Register</button>
+    <button type="submit" class="btn btn-lg btn-danger">Clear</button>
+    <!-- TODO: Add clear form function -->
+  </form>
+
+  <section class="col">
+    <p>Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quia adipisci, voluptatem incidunt velit iusto debitis nihil unde esse quos ipsum corrupti quaerat, odit minima porro? Perferendis quia dolore ea
+      non cum quasi rem explicabo mollitia nemo nihil tempore quod adipisci ex quibusdam, nisi vero earum hic exercitationem illum corrupti odit natus. Dicta eligendi minus aperiam numquam velit nihil iste, nisi ratione pariatur excepturi dolor sequi
+      natus voluptas, reiciendis non vel magnam totam itaque quidem nostrum dolorem! Possimus non ad, praesentium incidunt nisi amet quisquam ab fuga quasi, totam eveniet excepturi labore blanditiis cumque reiciendis deleniti! Provident numquam ullam
+      aperiam vel repellendus.</p>
+  </section>
+</div>
