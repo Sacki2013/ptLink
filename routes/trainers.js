@@ -83,6 +83,42 @@ router.get('/profile', passport.authenticate('jwt', { session: false }), (req, r
   });
 });
 
-// TODO: Note Really: passport.authenticate is how to protect routes for the user
+// Dashboard
+router.get('/Dashboard', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  res.json({
+    trainer: req.user
+  });
+});
+
+// Profile
+router.put('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  let updTrainer = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    userName: req.body.userName,
+    email: req.body.email,
+    age: req.body.age,
+    sex: req.body.sex,
+    repsRef: req.body.repsRef
+  };
+  let id = req.user._id;
+
+  Trainer.updateTrainer(id, updTrainer, (err, trainer) => {
+    if (err) {
+      res.json({
+        success: false,
+        message: err
+      });
+    } else {
+      res.json({
+        success: true,
+        message: "Trainer updated",
+        trainer: trainer
+      });
+    }
+  });
+});
+
+// TODO: Add compare password to PUT: Request. Also add change password. Frontend redirect to Dashboard
 
 module.exports = router;

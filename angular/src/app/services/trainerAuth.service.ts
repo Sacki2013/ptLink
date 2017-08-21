@@ -32,6 +32,14 @@ export class TrainerAuthService {
     return this.http.get('http://localhost:2204/trainer/profile', { headers: headers }).map(res => res.json());
   }
 
+  updateProfile(trainer){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.authToken);
+    return this.http.put('http://localhost:2204/trainer/profile', trainer, { headers: headers }).map(res => res.json());
+  }
+
   loadToken(){
     const token = localStorage.getItem('id_token');
     this.authToken = token;

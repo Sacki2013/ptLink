@@ -129,8 +129,7 @@
 
 
     <button type="submit" class="btn btn-lg btn-primary" [disabled]="!registrationForm.valid">Register</button>
-    <button type="submit" class="btn btn-lg btn-danger">Clear</button>
-    <!-- TODO: Add clear form function -->
+    <button type="submit" class="btn btn-lg btn-danger" [disabled]="!registrationForm.dirty" (click)="onClear()">Clear</button>
   </form>
 
   <section class="col">

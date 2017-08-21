@@ -50,6 +50,10 @@ export class TrainerRegisterComponent implements OnInit {
       }
     });
   }
+
+  onClear(){
+    this.registrationForm.reset();
+  }
   // TODO: Get more specific errors from backend for failed to add. data.message
 }
 

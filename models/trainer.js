@@ -14,6 +14,7 @@ const TrainerSchema = mongoose.Schema({
   age: { type: Number, required: true },
   sex: { type: String, required: true },
   repsRef: { type: String, required: true, unique: true },
+  isVerified: { type: Boolean, default: false },
   clients: { type: Array, default: [] },
   password: { type: String, required: true }
 });
@@ -44,4 +45,8 @@ module.exports.comparePassword = function(loginPassword, hash, callback) {
     if (err) throw err;
     callback(null, isMatch);
   });
+}
+
+module.exports.updateTrainer = function(id, updTrainer, callback) {
+  Trainer.findByIdAndUpdate(id, updTrainer, callback);
 }

@@ -1,23 +1,133 @@
-<div *ngIf="trainer">
-  <h2>{{ trainer.firstName }} {{ trainer.lastName }}</h2>
-  <ul class="list-group">
-    <li class="list-group-item">
-      Username: {{ trainer.userName }}
-    </li>
-    <li class="list-group-item">
-      Email: {{ trainer.email }}
-    </li>
-    <li class="list-group-item">
-      Sex: {{ trainer.sex }}
-    </li>
-    <li class="list-group-item">
-      Age: {{ trainer.age }}
-    </li>
-    <li class="list-group-item">
-      REPs Number: {{ trainer.repsRef }}
-    </li>
-    <li class="list-group-item">
-      Clients: {{ trainer.clients.length }}
-    </li>
-  </ul>
+<div class="row" *ngIf="trainer">
+  <form class="col-8" [formGroup]="editForm" (ngSubmit)="onEditSubmit(editForm.value)">
+    <h1>Edit Profile</h1>
+
+    <!-- First Name -->
+    <div class="form-group">
+      <label class="form-control-label">First Name</label>
+      <input type="text" class="form-control" [ngClass]="{'invalid': editForm.controls['firstName'].invalid && editForm.controls['firstName'].touched, 'valid': editForm.controls['firstName'].valid }" formControlName="firstName">
+      <div *ngIf="editForm.controls['firstName'].invalid &&editForm.controls['firstName'].touched">
+        <small class="form-text text-muted" *ngIf="editForm.controls['firstName'].errors.required && editForm.controls['firstName'].touched">
+          First Name is required
+        </small>
+        <small class="form-text text-muted" *ngIf="editForm.controls['firstName'].errors.minlength && editForm.controls['firstName'].touched">
+          Minimum length for First Name is 2 characters
+        </small>
+        <small class="form-text text-muted" *ngIf="editForm.controls['firstName'].errors.maxlength && editForm.controls['firstName'].touched">
+          Maximum length for First Name is 15 characters
+        </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- Last Name -->
+    <div class="form-group">
+      <label class="form-control-label">Last Name</label>
+      <input type="text" class="form-control" [ngClass]="{'invalid': editForm.controls['lastName'].invalid && editForm.controls['lastName'].touched, 'valid': editForm.controls['lastName'].valid }" formControlName="lastName">
+      <div *ngIf="editForm.controls['lastName'].invalid &&editForm.controls['lastName'].touched">
+        <small class="form-text text-muted" *ngIf="editForm.controls['lastName'].errors.required && editForm.controls['lastName'].touched">
+          Last Name is required
+        </small>
+        <small class="form-text text-muted" *ngIf="editForm.controls['lastName'].errors.minlength && editForm.controls['lastName'].touched">
+          Minimum length for Last Name is 3 characters
+        </small>
+        <small class="form-text text-muted" *ngIf="editForm.controls['lastName'].errors.maxlength && editForm.controls['lastName'].touched">
+          Maximum length for Last Name is 15 characters
+        </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- Username -->
+    <div class="form-group">
+      <label class="form-control-label">Username</label>
+      <input type="text" class="form-control" [ngClass]="{'invalid': editForm.controls['userName'].invalid && editForm.controls['userName'].touched, 'valid': editForm.controls['userName'].valid }" formControlName="userName">
+      <div *ngIf="editForm.controls['userName'].invalid &&editForm.controls['userName'].touched">
+        <small class="form-text text-muted" *ngIf="editForm.controls['userName'].errors.required && editForm.controls['userName'].touched">
+          Username is required
+        </small>
+        <small class="form-text text-muted" *ngIf="editForm.controls['userName'].errors.minlength && editForm.controls['userName'].touched">
+          Minimum length for Username is 5 characters
+        </small>
+        <small class="form-text text-muted" *ngIf="editForm.controls['userName'].errors.maxlength && editForm.controls['userName'].touched">
+          Maximum length for Username is 12 characters
+        </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- Email -->
+    <div class="form-group">
+      <label class="form-control-label">Email</label>
+      <input type="text" class="form-control" [ngClass]="{'invalid': editForm.controls['email'].invalid && editForm.controls['email'].touched, 'valid': editForm.controls['email'].valid }" formControlName="email">
+      <div *ngIf="editForm.controls['email'].invalid &&editForm.controls['email'].touched">
+        <small class="form-text text-muted" *ngIf="editForm.controls['email'].errors.required && editForm.controls['email'].touched">
+            Email is required
+          </small>
+        <small class="form-text text-muted" *ngIf="editForm.controls['email'].errors.pattern && editForm.controls['email'].touched">
+            A valid email address is required
+          </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- Age -->
+    <div class="form-group">
+      <label class="form-control-label">Age</label>
+      <input type="number" class="form-control" [ngClass]="{'invalid': editForm.controls['age'].invalid && editForm.controls['age'].touched, 'valid': editForm.controls['age'].valid }" formControlName="age">
+      <div *ngIf="editForm.controls['age'].invalid &&editForm.controls['age'].touched">
+        <small class="form-text text-muted" *ngIf="editForm.controls['age'].errors.required && editForm.controls['age'].touched">
+          Age is required
+        </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- Sex -->
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+            <input class="form-check-input" type="radio" formControlName="sex" id="inlineRadio1" value="male" [ngModel]="selectedSex"> Male
+          </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+            <input class="form-check-input" type="radio" formControlName="sex" id="inlineRadio2" value="female" [ngModel]="selectedSex"> Female
+          </label>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- REPS Ref -->
+    <div class="form-group">
+      <label class="form-control-label" data-toggle="tooltip" data-placement="top" title="Register of Exercise Professionals">REPs Number <i class="fa fa-question-circle"></i></label>
+      <!-- TODO: Add link in tooltip to REPS -->
+      <input type="text" class="form-control" [ngClass]="{'invalid': editForm.controls['repsRef'].invalid && editForm.controls['repsRef'].touched, 'valid': editForm.controls['repsRef'].valid }" formControlName="repsRef">
+      <div *ngIf="editForm.controls['repsRef'].invalid &&editForm.controls['repsRef'].touched">
+        <small class="form-text text-muted" *ngIf="editForm.controls['repsRef'].errors.required && editForm.controls['repsRef'].touched">
+            REPS number is required
+          </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+
+    <!-- Password -->
+    <div class="form-group">
+      <label class="form-control-label">Password</label>
+      <input type="password" class="form-control" [ngClass]="{'invalid': editForm.controls['password'].invalid && editForm.controls['password'].touched, 'valid': editForm.controls['password'].valid }" formControlName="password" placeholder="Current Password...">
+      <div *ngIf="editForm.controls['password'].invalid &&editForm.controls['password'].touched">
+        <small class="form-text text-muted" *ngIf="editForm.controls['password'].errors.required && editForm.controls['password'].touched">
+            Password is required
+          </small>
+        <small class="form-text text-muted" *ngIf="editForm.controls['password'].errors.minlength && editForm.controls['password'].touched">
+            Minimum length for password is 12 characters
+          </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
+    <!-- TODO: Add change and confirm password  -->
+
+
+    <button type="submit" class="btn btn-lg btn-primary" [disabled]="!editForm.valid">Update Profile</button>
+  </form>
 </div>
