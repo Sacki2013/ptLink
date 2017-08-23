@@ -11,6 +11,15 @@ const TrainerSchema = mongoose.Schema({
   lastName: { type: String, required: true },
   userName: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
+  address: {
+    doorNumber: { type: String },
+    street: { type: String },
+    town: { type: String },
+    city: { type: String },
+    postCode: { type: String }
+  }, 
+  trainingMethod: { type: String },
+  tags: [String],
   age: { type: Number, required: true },
   sex: { type: String, required: true },
   repsRef: { type: String, required: true, unique: true },

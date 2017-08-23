@@ -15,11 +15,20 @@ router.post('/register', (req, res, next) => {
     lastName: req.body.lastName,
     userName: req.body.userName,
     email: req.body.email,
+    address: {
+      doorNumber: req.body.doorNumber,
+      street: req.body.street,
+      town: req.body.town,
+      city: req.body.city,
+      postCode: req.body.postCode
+    },
+    tags: req.body.tags,
     age: req.body.age,
     sex: req.body.sex,
     repsRef: req.body.repsRef,
     password: req.body.password
   });
+
 
   Trainer.addTrainer(newTrainer, (err, trainer) => {
     if (err) {

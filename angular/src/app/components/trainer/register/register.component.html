@@ -120,22 +120,48 @@
             Password is required
           </small>
         <small class="form-text text-muted" *ngIf="registrationForm.controls['password'].errors.minlength && registrationForm.controls['password'].touched">
-            Minimum length for password is 12 characters
-          </small>
+          Minimum length for password is 12 characters
+        </small>
       </div>
     </div>
     <!-- ./form-group -->
-    <!-- TODO: Add confirm password  -->
+    
+    <!-- Password -->
+    <div class="form-group">
+      <label class="form-control-label">Confirm Password</label>
+      <input type="confirmPassword" class="form-control" [ngClass]="{'invalid': registrationForm.controls['confirmPassword'].invalid && registrationForm.controls['confirmPassword'].touched, 'valid': registrationForm.controls['confirmPassword'].valid }" formControlName="confirmPassword" placeholder="Secure Password...">
+      <div *ngIf="registrationForm.controls['confirmPassword'].invalid &&registrationForm.controls['confirmPassword'].touched">
+        <small class="form-text text-muted" *ngIf="registrationForm.controls['confirmPassword'].errors.required && registrationForm.controls['confirmPassword'].touched">
+            Please confirm your password
+          </small>
+        <small class="form-text text-muted" *ngIf="registrationForm.controls.confirmPassword.errors?.MatchPassword">
+            Passwords do not match
+        </small>
+      </div>
+    </div>
+    <!-- ./form-group -->
 
+    <!-- TODO: Check whether the "& registrationForm.controls['confirmPassword'].touched", for instance,is required on the small tages since it is on the parent element  -->
+    
+  <div formArrayName="tags">
+      <h4>Tags</h4>
+      <button class="btb btn-default" type="button" (click)="onAddTag()">Add Tag</button>
+      <div class="form-group" *ngFor="let tag of registrationForm.get('tags').controls; let i = index">
+      <input type="checkbox" [formControlName]="i">
+        {{ permittedTags[i] }}
+      </div>
+    </div>
+
+    <h4>Form Values</h4>
+    {{ registrationForm.value | json }} 
 
     <button type="submit" class="btn btn-lg btn-primary" [disabled]="!registrationForm.valid">Register</button>
     <button type="submit" class="btn btn-lg btn-danger" [disabled]="!registrationForm.dirty" (click)="onClear()">Clear</button>
   </form>
 
   <section class="col">
-    <p>Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quia adipisci, voluptatem incidunt velit iusto debitis nihil unde esse quos ipsum corrupti quaerat, odit minima porro? Perferendis quia dolore ea
-      non cum quasi rem explicabo mollitia nemo nihil tempore quod adipisci ex quibusdam, nisi vero earum hic exercitationem illum corrupti odit natus. Dicta eligendi minus aperiam numquam velit nihil iste, nisi ratione pariatur excepturi dolor sequi
-      natus voluptas, reiciendis non vel magnam totam itaque quidem nostrum dolorem! Possimus non ad, praesentium incidunt nisi amet quisquam ab fuga quasi, totam eveniet excepturi labore blanditiis cumque reiciendis deleniti! Provident numquam ullam
-      aperiam vel repellendus.</p>
+    <h2>About Info</h2>
+     <h4>Form Values</h4>
+    {{ registrationForm.value | json }} 
   </section>
 </div>
